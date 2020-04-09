@@ -683,8 +683,6 @@ const Keyboard = {
 Keyboard.init();
 Keyboard.createKeys();
 document.onkeydown = function (event) {
-    keyboard.push(event.code);
-    console.log(keyboard);
     document.querySelector('.keyboard__key[data="' + event.code + '"]').classList.add('active');
     Keyboard.capsRun();
     if (event.code == "CapsLock" && Keyboard.keyLayout[16].typeEnd == false && Keyboard.elements.leng == true) {
