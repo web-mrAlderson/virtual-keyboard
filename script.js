@@ -4,7 +4,8 @@ const Keyboard = {
         keyboardContainer: null,
         keysConteiner: null,
         textEria: null,
-        leng: false
+        leng: false,
+        capsLock: false
     },
 
     keyLayout: [{
@@ -548,165 +549,67 @@ const Keyboard = {
 
     },
 
-    createKeys() {
+    createKeys(event) {
         let out = '';
         for (let i = 0; i < this.keyLayout.length; i++) {
             if (this.keyLayout[i].code == "Backspace" || this.keyLayout[i].code == "Delete") {
-                out += '<div class="keyboard__key keyboard__key--hot--key" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].en + '</div>' + '</br>';
+                out += '<div class="keyboard__key keyboard__key--hot--key" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i][event] + '</div>' + '</br>';
             } else if (this.keyLayout[i].code == "CapsLock") {
-                out += '<div class="keyboard__key keyboard__key--hot--key" id="CapsLock" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].en + '</div>';
+                out += '<div class="keyboard__key keyboard__key--hot--key" id="CapsLock" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i][event] + '</div>';
             } else if (this.keyLayout[i].code == "Enter") {
-                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].en + '</div>' + '</br>';
+                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i][event] + '</div>' + '</br>';
             } else if (this.keyLayout[i].code == "ShiftLeft" && this.keyLayout[i].typeEnd == false) {
-                out += '<div class="keyboard__key keyboard__key--shift" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].en + '</div>';
+                out += '<div class="keyboard__key keyboard__key--shift" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i][event] + '</div>';
             } else if (this.keyLayout[i].code == "ShiftRight" && this.keyLayout[i].typeEnd == true) {
-                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].en + '</div>' + '</br>';
+                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i][event] + '</div>' + '</br>';
             } else if (this.keyLayout[i].code == "Space") {
-                out += '<div class="keyboard__key keyboard__key--hot--key--space" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].en + '</div>';
+                out += '<div class="keyboard__key keyboard__key--hot--key--space" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i][event] + '</div>';
             } else if (this.keyLayout[i].code == "ArrowUp") {
-                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + '<span class="keyboard__key--up--arrow">' + this.keyLayout[i].en + '</span>' + '</div>';
+                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + '<span class="keyboard__key--up--arrow">' + this.keyLayout[i][event] + '</span>' + '</div>';
             } else if (this.keyLayout[i].code == "ArrowLeft") {
-                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + '<span class="keyboard__key--left--arrow">' + this.keyLayout[i].en + '</span>' + '</div>';
+                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + '<span class="keyboard__key--left--arrow">' + this.keyLayout[i][event] + '</span>' + '</div>';
             } else if (this.keyLayout[i].code == "ArrowDown") {
-                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + '<span class="keyboard__key--arrow--to--down">' + this.keyLayout[i].en + '</span>' + '</div>';
+                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + '<span class="keyboard__key--arrow--to--down">' + this.keyLayout[i][event] + '</span>' + '</div>';
             } else {
-                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].en + '</div>';
+                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i][event] + '</div>';
             }
         }
         return document.querySelector('.keyboard').innerHTML = out;
 
     },
-    createKeysRu() {
-        let out = '';
-        for (let i = 0; i < this.keyLayout.length; i++) {
-            if (this.keyLayout[i].code == "Backspace" || this.keyLayout[i].code == "Delete") {
-                out += '<div class="keyboard__key keyboard__key--hot--key" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].ru + '</div>' + '</br>';
-            } else if (this.keyLayout[i].code == "CapsLock") {
-                out += '<div class="keyboard__key keyboard__key--hot--key" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].ru + '</div>';
-            } else if (this.keyLayout[i].code == "Enter") {
-                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].ru + '</div>' + '</br>';
-            } else if (this.keyLayout[i].code == "ShiftLeft" && this.keyLayout[i].typeEnd == false) {
-                out += '<div class="keyboard__key keyboard__key--shift" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].ru + '</div>';
-            } else if (this.keyLayout[i].code == "ShiftRight" && this.keyLayout[i].typeEnd == true) {
-                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].ru + '</div>' + '</br>';
-            } else if (this.keyLayout[i].code == "Space") {
-                out += '<div class="keyboard__key keyboard__key--hot--key--space" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].ru + '</div>';
-            } else if (this.keyLayout[i].code == "ArrowUp") {
-                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + '<span class="keyboard__key--up--arrow">' + this.keyLayout[i].ru + '</span>' + '</div>';
-            } else if (this.keyLayout[i].code == "ArrowLeft") {
-                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + '<span class="keyboard__key--left--arrow">' + this.keyLayout[i].ru + '</span>' + '</div>';
-            } else if (this.keyLayout[i].code == "ArrowDown") {
-                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + '<span class="keyboard__key--arrow--to--down">' + this.keyLayout[i].ru + '</span>' + '</div>';
-            } else {
-                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].ru + '</div>';
-            }
-        }
-        return document.querySelector('.keyboard').innerHTML = out;
-
-    },
-    eventShiftRu() {
-        let out = '';
-        for (let i = 0; i < this.keyLayout.length; i++) {
-            if (this.keyLayout[i].code == "Backspace" || this.keyLayout[i].code == "Delete") {
-                out += '<div class="keyboard__key keyboard__key--hot--key" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].eventShiftRu + '</div>' + '</br>';
-            } else if (this.keyLayout[i].code == "CapsLock") {
-                out += '<div class="keyboard__key keyboard__key--hot--key" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].eventShiftRu + '</div>';
-            } else if (this.keyLayout[i].code == "Enter") {
-                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].eventShiftRu + '</div>' + '</br>';
-            } else if (this.keyLayout[i].code == "ShiftLeft" && this.keyLayout[i].typeEnd == false) {
-                out += '<div class="keyboard__key keyboard__key--shift" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].eventShiftRu + '</div>';
-            } else if (this.keyLayout[i].code == "ShiftRight" && this.keyLayout[i].typeEnd == true) {
-                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].eventShiftRu + '</div>' + '</br>';
-            } else if (this.keyLayout[i].code == "Space") {
-                out += '<div class="keyboard__key keyboard__key--hot--key--space" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].eventShiftRu + '</div>';
-            } else if (this.keyLayout[i].code == "ArrowUp") {
-                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + '<span class="keyboard__key--up--arrow">' + this.keyLayout[i].eventShiftRu + '</span>' + '</div>';
-            } else if (this.keyLayout[i].code == "ArrowLeft") {
-                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + '<span class="keyboard__key--left--arrow">' + this.keyLayout[i].eventShiftRu + '</span>' + '</div>';
-            } else if (this.keyLayout[i].code == "ArrowDown") {
-                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + '<span class="keyboard__key--arrow--to--down">' + this.keyLayout[i].eventShiftRu + '</span>' + '</div>';
-            } else {
-                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].eventShiftRu + '</div>';
-            }
-        }
-        return document.querySelector('.keyboard').innerHTML = out;
-
-    },
-    eventShiftEn() {
-        let out = '';
-        for (let i = 0; i < this.keyLayout.length; i++) {
-            if (this.keyLayout[i].code == "Backspace" || this.keyLayout[i].code == "Delete") {
-                out += '<div class="keyboard__key keyboard__key--hot--key" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].eventShiftEn + '</div>' + '</br>';
-            } else if (this.keyLayout[i].code == "CapsLock") {
-                out += '<div class="keyboard__key keyboard__key--hot--key" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].eventShiftEn + '</div>';
-            } else if (this.keyLayout[i].code == "Enter") {
-                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].eventShiftEn + '</div>' + '</br>';
-            } else if (this.keyLayout[i].code == "ShiftLeft" && this.keyLayout[i].typeEnd == false) {
-                out += '<div class="keyboard__key keyboard__key--shift" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].eventShiftEn + '</div>';
-            } else if (this.keyLayout[i].code == "ShiftRight" && this.keyLayout[i].typeEnd == true) {
-                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].eventShiftEn + '</div>' + '</br>';
-            } else if (this.keyLayout[i].code == "Space") {
-                out += '<div class="keyboard__key keyboard__key--hot--key--space" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].eventShiftEn + '</div>';
-            } else if (this.keyLayout[i].code == "ArrowUp") {
-                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + '<span class="keyboard__key--up--arrow">' + this.keyLayout[i].eventShiftEn + '</span>' + '</div>';
-            } else if (this.keyLayout[i].code == "ArrowLeft") {
-                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + '<span class="keyboard__key--left--arrow">' + this.keyLayout[i].eventShiftEn + '</span>' + '</div>';
-            } else if (this.keyLayout[i].code == "ArrowDown") {
-                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + '<span class="keyboard__key--arrow--to--down">' + this.keyLayout[i].eventShiftEn + '</span>' + '</div>';
-            } else {
-                out += '<div class="keyboard__key" data="' + this.keyLayout[i].code + '">' + this.keyLayout[i].eventShiftEn + '</div>';
-            }
-        }
-        return document.querySelector('.keyboard').innerHTML = out;
-
-    },
-    capsRun() {
-        if (event.code == "CapsLock" && Keyboard.keyLayout[16].typeEnd == false && Keyboard.elements.leng == false) {
-            Keyboard.keyLayout[16].typeEnd = true;
-            Keyboard.eventShiftEn();
-        } else if (event.code == "CapsLock" && Keyboard.keyLayout[16].typeEnd == true && Keyboard.elements.leng == false) {
-            Keyboard.keyLayout[16].typeEnd = false;
-            Keyboard.createKeys();
-        };
-        if (event.code == "CapsLock" && Keyboard.keyLayout[16].typeEnd == false && Keyboard.elements.leng == true) {
-            Keyboard.keyLayout[16].typeEnd = true;
-            Keyboard.eventShiftRu();
-        } else if (event.code == "CapsLock" && Keyboard.keyLayout[16].typeEnd == true && Keyboard.elements.leng == true) {
-            Keyboard.keyLayout[16].typeEnd = false;
-            Keyboard.createKeysRu();
-        };
-    }
-
 }
 
+const ru            = "ru"
+const en            = "en"
+const eventShiftRu  = "eventShiftRu"
+const eventShiftEn  = "eventShiftEn"
 
 Keyboard.init();
-Keyboard.createKeys();
+Keyboard.createKeys(en);
 document.onkeydown = function (event) {
     document.querySelector('.keyboard__key[data="' + event.code + '"]').classList.add('active');
-    Keyboard.capsRun();
-    if (event.code == "CapsLock" && Keyboard.keyLayout[16].typeEnd == false && Keyboard.elements.leng == true) {
-        Keyboard.keyLayout[16].typeEnd = true;
-        Keyboard.eventShiftRu();
+    if (event.code == "CapsLock" && Keyboard.elements.capsLock == false && Keyboard.elements.leng == true) {
+        Keyboard.elements.capsLock == true
+        Keyboard.createKeys(eventShiftRu);
         
-    } else if (event.code == "CapsLock" && Keyboard.keyLayout[16].typeEnd == true && Keyboard.elements.leng == true) {
-        Keyboard.keyLayout[16].typeEnd = false;
-        Keyboard.createKeysRu();
+    } else if (event.code == "CapsLock" && Keyboard.elements.capsLock == true && Keyboard.elements.leng == true) {
+        Keyboard.elements.capsLock == false
+        Keyboard.createKeys(ru);
         
     };
     if (event.code == "ShiftLeft" && Keyboard.elements.leng == false || event.code == "ShiftRight" && Keyboard.elements.leng == false) {
-        Keyboard.eventShiftEn();
-        document.querySelector('.keyboard__key[data="' + event.code + '"]').classList.add('active');
+        Keyboard.createKeys(eventShiftEn);
+        console.log(event.code);
     } else if (event.code == "ShiftLeft" && Keyboard.elements.leng == true || event.code == "ShiftRight" && Keyboard.elements.leng == true) {
-        Keyboard.eventShiftRu();
+        Keyboard.createKeys(eventShiftRu);
     };
     if (event.code == "ControlRight" && Keyboard.elements.leng == false) {
         document.querySelector('.keyboard__key[data="' + event.code + '"]').classList.add('active');
         Keyboard.elements.leng = true;
-        Keyboard.createKeysRu();
+        Keyboard.createKeys(ru);
     } else if (event.code == "ControlRight" && Keyboard.elements.leng == true) {
         Keyboard.elements.leng = false;
-        Keyboard.createKeys();
+        Keyboard.createKeys(en);
     }
 };
 
@@ -714,18 +617,18 @@ document.onkeydown = function (event) {
 document.onkeyup = function (event) {
     document.querySelector('.keyboard__key[data="' + event.code + '"]').classList.remove('active');
     if (event.code == "ShiftLeft" || event.code == "ShiftRight") {
-        Keyboard.createKeys();
+        Keyboard.createKeys(en);
     };
 };
 
-const capss = document.getElementById("CapsLock");
+// const capss = document.getElementById("CapsLock");
 
-capss.addEventListener("click", caps);
+// capss.addEventListener("click", capsRun);
 
-function caps() {
-    if (Keyboard.keyLayout[16].typeEnd == false && Keyboard.elements.leng == false) {
-        Keyboard.keyLayout[16].typeEnd = true;
-        Keyboard.eventShiftEn();
-        capss.removeEventListener("click", caps);
-    }
-};
+// capsRun = () => {
+//     if (Keyboard.keyLayout[16].typeEnd == false && Keyboard.elements.leng == false) {
+//         Keyboard.keyLayout[16].typeEnd = true;
+//         Keyboard.createKeys(eventShiftEn);
+//         capss.removeEventListener("click", caps);
+//     }
+// };
