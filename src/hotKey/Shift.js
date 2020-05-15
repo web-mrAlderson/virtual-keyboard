@@ -1,10 +1,9 @@
 /* eslint linebreak-style: ["error", "windows"] */
-import triger from '../script.js';
 
 export default {
   shiftkeyDown(event, data) {
     if (event === 'ShiftLeft' && data.leng === false) {
-      if (triger.capsLock === false) {
+      if (toogle.capsLock === false) {
         data.clearHtmlCallback();
         data.callback(data.eventShiftEn);
       } else {
@@ -12,7 +11,7 @@ export default {
         data.callback(data.en);
       }
     } else if (event === 'ShiftRight' && data.leng === false) {
-      if (triger.capsLock === false) {
+      if (capsLock === false) {
         data.clearHtmlCallback();
         data.callback(data.eventShiftEn);
       } else {
@@ -28,17 +27,17 @@ export default {
     }
   },
   shiftkeyUp(event, data) {
-    if (event === 'ShiftLeft' && triger.capsLock === false) {
+    if (event === 'ShiftLeft' && capsLock === false) {
       data.clearHtmlCallback();
       data.callback(data.en);
-    } else if (event === 'ShiftLeft' && triger.capsLock === true) {
+    } else if (event === 'ShiftLeft' && capsLock === true) {
       data.clearHtmlCallback();
       data.callback(data.eventShiftEn);
     }
-    if (event === 'ShiftRight' && triger.capsLock === false) {
+    if (event === 'ShiftRight' && capsLock === false) {
       data.clearHtmlCallback();
       data.callback(data.en);
-    } else if (event === 'ShiftRight' && triger.capsLock === true) {
+    } else if (event === 'ShiftRight' && capsLock === true) {
       data.clearHtmlCallback();
       data.callback(data.eventShiftEn);
     }
