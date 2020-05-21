@@ -4,6 +4,6 @@
 export const Key = {
   key(event) {
     const textAria = document.getElementById('Eria');
-    if (event.path[0].innerHTML.length < 5) { textAria.value += event.path[0].innerHTML; }
+    if (event.path[0].innerHTML.length < 2) { textAria.value += event.path[0].innerHTML; }
   },
 };
