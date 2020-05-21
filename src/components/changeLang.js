@@ -1,56 +1,17 @@
-
+/* eslint-disable import/prefer-default-export */
 /* eslint-disable import/extensions */
 /* eslint linebreak-style: ["error", "windows"] */
 
+import {
+  hotShift,
+  CapsLock,
+  hotTab,
+  Backspace,
+  Key,
+} from '../hotKey/index.js';
 
-const toogle = {
-  leng: false,
-  capsLock: false,
-};
-export default {
 
-  shiftkeyDown(event, data) {
-    if (event === 'ShiftLeft' && toogle.leng === false) {
-      if (toogle.capsLock === false) {
-        data.clearHtmlCallback();
-        data.callback(data.eventShiftEn);
-      } else {
-        data.clearHtmlCallback();
-        data.callback(data.en);
-      }
-    } else if (event === 'ShiftRight' && toogle.leng === false) {
-      if (toogle.capsLock === false) {
-        data.clearHtmlCallback();
-        data.callback(data.eventShiftEn);
-      } else {
-        data.clearHtmlCallback();
-        data.callback(data.en);
-      }
-    } else if (event === 'ShiftLeft' && data.leng === true) {
-      data.clearHtmlCallback();
-      data.callback(data.eventShiftRu);
-    } else if (event === 'ShiftRight' && data.leng === true) {
-      data.clearHtmlCallback();
-      data.callback(data.eventShiftRu);
-    }
-  },
-
-  shiftkeyUp(event, data) {
-    if (event === 'ShiftLeft' && toogle.capsLock === false) {
-      data.clearHtmlCallback();
-      data.callback(data.en);
-    } else if (event === 'ShiftLeft' && toogle.capsLock === true) {
-      data.clearHtmlCallback();
-      data.callback(data.eventShiftEn);
-    }
-    if (event === 'ShiftRight' && toogle.capsLock === false) {
-      data.clearHtmlCallback();
-      data.callback(data.en);
-    } else if (event === 'ShiftRight' && toogle.capsLock === true) {
-      data.clearHtmlCallback();
-      data.callback(data.eventShiftEn);
-    }
-  },
+export const changeLang = {
 
   keyDown(keyboard,
     en, ru, eventShiftEn,
@@ -69,38 +30,27 @@ export default {
     };
     keyboard.addEventListener('mousedown', (event) => {
       const dataKey = event.path[0].dataset.data;
-      if (dataKey === 'CapsLock' && toogle.capsLock === false && leng === false) {
-        clearHtmlCallback();
-        callback(capsEn);
-        this.capsLock = true;
-      } else if (dataKey === 'CapsLock' && toogle.capsLock === true && toogle.leng === false) {
-        clearHtmlCallback();
-        this.capsLock = false;
-        callback(en);
-      }
-      if (dataKey === 'CapsLock' && toogle.capsLock === false && toogle.leng === true) {
-        toogle.capsLock = true;
-        clearHtmlCallback();
-        callback(capsRu);
-      } else if (dataKey === 'CapsLock' && toogle.capsLock === true && toogle.leng === true) {
-        toogle.capsLock = false;
-        clearHtmlCallback();
-        callback(ru);
-      }
-      this.shiftkeyDown(dataKey, data);
-      if (dataKey === 'ControlRight' && toogle.leng === false) {
-        clearHtmlCallback();
-        toogle.leng = true;
-        callback(ru);
-      } else if (dataKey === 'ControlRight' && toogle.leng === true) {
-        clearHtmlCallback();
-        toogle.leng = false;
-        callback(en);
-      }
+      console.log(event.path[0].innerHTML.length);
+      CapsLock.CapsLockDown(dataKey, data);
+      hotShift.shiftkeyDown(dataKey, data);
+      hotTab.tab(dataKey);
+      Backspace.Back(dataKey);
+      Key.key(event);
     });
     keyboard.addEventListener('mouseup', (event) => {
       const dataKey = event.path[0].dataset.data;
-      this.shiftkeyUp(dataKey, data);
+      hotShift.shiftkeyUp(dataKey, data);
     });
+    document.onkeydown = (event) => {
+      console.log(event.code);
+      CapsLock.CapsLockDown(event.code, data);
+      hotShift.shiftkeyDown(event.code, data);
+      hotTab.tab(event.code);
+      document.querySelector(`.keyboard__key[data-data="${event.code}"]`).classList.add('active');
+    };
+    document.onkeyup = (event) => {
+      hotShift.shiftkeyUp(event.code, data);
+      document.querySelector(`.keyboard__key[data-data="${event.code}"]`).classList.remove('active');
+    };
   },
 };

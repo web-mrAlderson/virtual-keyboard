@@ -4,7 +4,6 @@
 
 import keyLayout from '../layouts/base.js';
 import create from './create.js';
-import changeLang from './changeLang.js';
 
 export const Keyboard = {
   elements: {
@@ -32,6 +31,7 @@ export const Keyboard = {
 
     this.elements.wrapper.classList.add('wrapper');
     this.elements.textEria.classList.add('input');
+    this.elements.textEria.id = 'Eria';
     this.elements.keyboardContainer.classList.add('keyboard');
     this.elements.keyboardContainer.id = 'keyboard';
     this.elements.keysConteiner.classList.add('keyboard__key');
@@ -126,15 +126,3 @@ export const Keyboard = {
     this.keyboard.innerHTML = '';
   },
 };
-
-Keyboard.init();
-Keyboard.createKeys(Keyboard.elements.en);
-changeLang.keyDown(Keyboard.elements.keyboardContainer,
-  Keyboard.elements.en,
-  Keyboard.elements.ru,
-  Keyboard.elements.eventShiftEn,
-  Keyboard.elements.eventShiftRu,
-  Keyboard.createKeys,
-  Keyboard.elements.capsEn,
-  Keyboard.elements.capsRu,
-  Keyboard.clearHtml);
