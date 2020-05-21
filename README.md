@@ -26,7 +26,7 @@
 - [x] использование Angular/React/Vue и других фреймворков не допускается  
 - [ ] можно использовать CSS preprocessors  
 - [x] использовать [eslint (eslint-config-airbnb-base)](https://eslint.org/)
-- [x] рабочее приложение должно быть размещено на GitHub Pages (https://pages.github.com/), это произойдет автоматически при создании `gh-pages` бранча. После чего страница будет доступна по адресу вида https://your-github-account.github.io/name-repository
+- [x] рабочее приложение должно быть размещено на GitHub Pages (https://pages.github.com/), это произойдет автоматически при создании `gh-pages` бранча. После чего страница будет доступна по адресу вида https://web-mralderson.github.io/virtual-keyboard/
 
 ### Требования к коммитам, PR, репозиторию
 - [x] название PR должно содержать **the task name**
